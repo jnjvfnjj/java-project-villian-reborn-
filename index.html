@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игра: Перерождение — Глава 1</title>
+    <style>
+        body {
+          background-color: #2b0f0f;
+          color: #fff;
+          font-family: Arial, sans-serif;
+          padding: 20px;
+        }
+        #status {
+          margin-bottom: 20px;
+          border: 2px solid #fff;
+          padding: 10px;
+          border-radius: 5px;
+        }
+        #choices button {
+          display: block;
+          margin: 5px 0;
+          padding: 10px;
+          font-size: 16px;
+          background-color: #900;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        #choices button:hover {
+          background-color: #c00;
+        }
+    </style>
+</head>
+<body>
+<h1>Игра: Перерождение — Глава 1</h1>
+
+<div id="status"></div>
+<div id="story-text"></div>
+<div id="choices"></div>
+
+<script>
+    // Игрок
+    const player = {
+      name: prompt("Введите имя вашей героини:") || "Антагонист",
+      charisma: 5,
+      strength: 5,
+      flags: []
+    };
+
+    // Узлы истории
+    const nodes = {
+      start: {
+        text: `Медленно открываешь глаза. Ты ожидала услышать гудение машины, или любой другой шум. Но вокруг тишина.
+Врачи отошли на минутку? Или ты не переживала операцию? Что странно — ты смотришь на незнакомый потолок.
+Она не белая, а красная, украшенная золотыми узорами. Ты непонимающе встаешь и тут же чувствуешь пульсацию в голове, достаточно сильное,
+но куда слабее чем должна быть. После такой операции ты вообще не должна была быть способна двигаться на долгое время.
+
+Ты осматриваешь комнату. Это точно не реанимация. Это даже не больница. Ты понимаешь, что находишься в роскошной комнате, красной и позолоченной золотом.
+Твой взгляд падает на большое зеркало с противоположной стороны комнаты. Там ты видишь девушку. Черные, вьющиеся волосы до колен, красные глаза напоминающие кровь,
+черты лица резкие и бледная кожа. Она была красивой, но важнее было то, что она могла ответить на твои вопросы, поэтому ты открыла рот, чтобы обратиться к ней.
+Ты замкнулась, решив дать ей говорить первой, но и она молчала. Наконец, ты решаешь встать, и она тоже встала.
+
+Осознание пришло внезапно — ты медленно помахала рукой, она делала то же самое. Это была ты, которое отражалось в зеркале.
+
+Пока ты любовалась отражением и думала, что делать, послышался грохот. Ты оглянулась — в дверном проёме стола девушка в форме служанки, которая уронила поднос.
+Она судорожно собирала то, что уронила, и без конца извинялась.
+
+Ты подошла к ней, чтобы задать вопрос.
+
+- Риана (или другое имя по выбору), — крикнул мужчина с коридора.`,
+        choices: [
+          { desc: "Я не Риханна", next: "choice1", effect: () => player.charisma++ },
+          { desc: "Что тебе надо", next: "choice2", effect: () => player.strength++ }
+        ]
+      },
+      choice1: {
+        text: `Ты сказала, что не Риханна. Девушка-слуга удивленно посмотрела на тебя, но продолжила собирать поднос.
+Мужчина из коридора приблизился чуть ближе, оценивая твою реакцию.`,
+        choices: [
+          { desc: "Подойти к мужчине", next: "end" },
+          { desc: "Остаться с девушкой", next: "end" }
+        ]
+      },
+      choice2: {
+        text: `Ты спросила, что ему нужно. Мужчина внимательно посмотрел на тебя, а девушка продолжала судорожно собирать поднос.
+Ситуация напряженная, но у тебя есть возможность действовать.`,
+        choices: [
+          { desc: "Подойти к мужчине", next: "end" },
+          { desc: "Остаться с девушкой", next: "end" }
+        ]
+      },
+      end: {
+        text: "Конец первой сцены. Перезапустите игру, чтобы начать сначала.",
+        choices: []
+      }
+    };
+
+    let currentNode = "start";
+
+    function renderNode(id) {
+      const node = nodes[id];
+      currentNode = id;
+
+      // Обновляем статус игрока
+      document.getElementById("status").innerHTML =
+        `<b>Имя:</b> ${player.name} | <b>Сила:</b> ${player.strength} | <b>Харизма:</b> ${player.charisma} | <b>Флаги:</b> ${player.flags.join(", ")}`;
+
+      // Текст истории
+      document.getElementById("story-text").innerText = node.text;
+
+      // Кнопки выбора
+      const choicesDiv = document.getElementById("choices");
+      choicesDiv.innerHTML = "";
+
+      if(node.choices.length === 0){
+        const restartBtn = document.createElement("button");
+        restartBtn.innerText = "Перезапустить игру";
+        restartBtn.onclick = () => location.reload();
+        choicesDiv.appendChild(restartBtn);
+      } else {
+        node.choices.forEach(c => {
+          const btn = document.createElement("button");
+          btn.innerText = c.desc;
+          btn.onclick = () => {
+            if(c.effect) c.effect();
+            renderNode(c.next);
+          };
+          choicesDiv.appendChild(btn);
+        });
+      }
+    }
+
+    // Запуск игры
+    renderNode(currentNode);
+</script>
+</body>
+</html>
