@@ -1,0 +1,153 @@
+/* Основные стили */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Главный фон */
+.main-layout {
+    -fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+}
+
+/* Кнопки */
+.button {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 15, 0, 0, 0);
+}
+
+.button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Текстовые поля */
+.text-area {
+    -fx-background-color: rgba(15, 52, 96, 0.8);
+    -fx-background-radius: 5;
+    -fx-border-color: #3498db;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+/* Метки */
+.label {
+    -fx-text-fill: white;
+}
+
+/* Панели с закругленными углами */
+.panel-rounded {
+    -fx-background-color: rgba(52, 73, 94, 0.8);
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+}
+
+/* Прогресс-бары */
+.progress-bar > .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 5;
+}
+
+.progress-bar > .bar {
+    -fx-background-radius: 5;
+    -fx-padding: 2px;
+}
+
+/* Списки */
+.list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 5;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 5 10;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: rgba(52, 152, 219, 0.5);
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Разделители */
+.separator {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Всплывающие подсказки */
+.tooltip {
+    -fx-background-color: rgba(44, 62, 80, 0.95);
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-color: #3498db;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 5 10;
+    -fx-font-size: 12px;
+}
+
+/* Скроллбары */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 5;
+}
+
+/* Анимации */
+@keyframes pulse {
+    0% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    50% { -fx-scale-x: 1.05; -fx-scale-y: 1.05; }
+    100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+}
+
+.pulse {
+    -fx-animation: pulse 2s infinite;
+}
+
+/* Эффекты для важных элементов */
+.important {
+    -fx-effect: dropshadow(gaussian, #f1c40f, 10, 0.5, 0, 0);
+}
+
+.warning {
+    -fx-effect: dropshadow(gaussian, #e74c3c, 10, 0.5, 0, 0);
+}
