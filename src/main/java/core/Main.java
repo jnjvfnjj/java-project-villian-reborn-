@@ -1,17 +1,18 @@
 package core;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import ui.GameUI;
-import core.GameEngine;
 
+public class Main extends Application {
 
+    @Override
+    public void start(Stage stage) {
+        System.out.println("START CALLED");
+        new GameUI().start(stage);
+    }
 
-public class Main {
     public static void main(String[] args) {
-        System.out.println("🎮 Запуск Villian Reborn...");
-
-        GameEngine gameEngine = new GameEngine();
-        GameUI gameUI = new GameUI(gameEngine);
-
-        gameUI.startGame();
+        launch(args);
     }
 }

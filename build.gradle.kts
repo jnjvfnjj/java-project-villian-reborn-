@@ -1,7 +1,7 @@
 plugins {
     java
     application
-    id("org.openjfx.javafxplugin") version "0.1.0"
+    id("org.openjfx.javafxplugin") version "0.0.14"
 }
 
 java {
@@ -16,12 +16,8 @@ repositories {
 
 javafx {
     version = "21"
-    modules("javafx.controls", "javafx.fxml")
+    modules = listOf("javafx.controls", "javafx.fxml")
 }
-repositories {
-    mavenCentral()
-}
-
 
 application {
     mainClass.set("core.Main")

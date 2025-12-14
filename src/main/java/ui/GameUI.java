@@ -1,18 +1,29 @@
 package ui;
 
-import core.GameEngine;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class GameUI {
 
-    private final GameEngine gameEngine;
+    public void start(Stage stage) {
+        stage.setTitle("Villian Reborn");
 
-    // 🔹 ВОТ ЭТОГО КОНСТРУКТОРА НЕ ХВАТАЛО
-    public GameUI(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
-    }
+        Button btn = new Button("Click me!");
+        btn.setOnAction(e -> System.out.println("Button clicked!"));
 
-    public void startGame() {
-        System.out.println("🖥 UI запущен");
-        // позже здесь будет JavaFX Stage / Scene
+        VBox root = new VBox(10);
+        root.getChildren().add(btn);
+
+        Scene scene = new Scene(root, 400, 300);
+        stage.setScene(scene);
+        stage.show();
+
+        // Пример: закрыть приложение через 10 секунд (для теста)
+        Platform.runLater(() -> {
+            //stage.close();
+        });
     }
 }
